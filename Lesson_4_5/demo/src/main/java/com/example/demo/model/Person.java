@@ -1,9 +1,16 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id = 0L;
+    @Column(name = "name")
     private String name = "";
+    @Column(unique = true, nullable = false)
     private String phone = "";
 
     public Person() {}
