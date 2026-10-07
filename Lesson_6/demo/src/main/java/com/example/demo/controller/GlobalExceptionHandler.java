@@ -4,6 +4,7 @@ package com.example.demo.controller;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -11,6 +12,7 @@ import org.springframework.web.method.annotation.HandlerMethodValidationExceptio
 
 import java.time.OffsetDateTime;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 
 @RestControllerAdvice
@@ -75,6 +77,12 @@ public class GlobalExceptionHandler {
         return pd;
     }
 
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<?> handleNoSuchElementException(
+            NoSuchElementException ex
+    ) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 
 }
